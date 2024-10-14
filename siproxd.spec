@@ -94,14 +94,9 @@ getent passwd %{siproxduser} >/dev/null || \
 %{_unitdir}
 %{_unitdir}/siproxd.service
 
-%_mandir/man8/%{name}.8*
-
 %dir %{_sysconfdir}/%{name}
 # make rpm know about a directory but do not package it
 %attr(0750,%{siproxduser},root) %ghost %{_rundir}/%{name}
-
-%files doc
-%doc doc/html/* doc/pdf/*
 
 %changelog
 %autochangelog
