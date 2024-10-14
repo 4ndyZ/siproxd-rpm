@@ -1,0 +1,16 @@
+[Unit]
+Description=SIP proxy daemon (siproxd)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+TimeoutSec=5min
+PIDFile=/run/siproxd
+ExecStart=/usr/sbin/siproxd
+ExecStop=/bin/kill -TERM $MAINPID
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
