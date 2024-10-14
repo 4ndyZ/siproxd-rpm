@@ -10,8 +10,6 @@ License:        GPL-2.0-or-later
 Group:          Productivity/Networking/Other
 URL:            http://siproxd.sourceforge.net/
 Source0:        https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
-Source1:        siproxd.service
-Source2:        siproxd.logrotate
 Requires:	    libosip2 >= 3.0.0
 BuildRequires:	libosip2 >= 3.0.0
 BuildRequires:	libosip2-devel >= 3.0.0
@@ -50,11 +48,11 @@ sed -i -e "s@nobody@%{siproxduser}@" %{buildroot}%{_sysconfdir}/%{name}/%{name}.
 
 # Deploy logrotate
 install -d %{buildroot}/%{_sysconfdir}/logrotate.d/
-install -m 0644 %{S:2} %{buildroot}/%{_sysconfdir}/logrotate.d/%{name}
+install -m 0644 %{name}.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/%{name}
 
 # Deploy systemd
 install -d %{buildroot}/%{_unitdir}
-install -m 644 %{S:1} %{buildroot}/%{_unitdir}
+install -m 644 %{name}.service %{buildroot}/%{_unitdir}
 install -d %buildroot/%{_sbindir}
 
 # Directory needs to exist for packaging
