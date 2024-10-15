@@ -17,6 +17,7 @@ Requires:	    libosip2 >= 3.0.0
 BuildRequires:	libosip2 >= 3.0.0
 BuildRequires:	libosip2-devel >= 3.0.0
 BuildRequires:  automake
+BuildRequires:  libtool
 Requires(pre):  %{_sbindir}/groupadd
 Requires(pre):  %{_sbindir}/useradd
 
