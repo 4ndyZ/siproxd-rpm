@@ -6,24 +6,22 @@
 %define siproxduser     siproxd
 %define siproxdgroup    siproxd
 
-Name:           siproxd
-Version:        %{project_version_major}.%{project_version_minor}.%{project_version_patch}
-Release:        1%{?dist}
-Summary:        A SIP masquerading proxy with RTP support
-License:        GPL-2.0-or-later
+Name:          siproxd
+Version:       %{project_version_major}.%{project_version_minor}.%{project_version_patch}
+Release:       1%{?dist}
+Summary:       A SIP masquerading proxy with RTP support
+License:       GPL-2.0-or-later
 
-URL:            http://siproxd.sourceforge.net/
-Source0:        https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
-
-# 
-Patch0:         siproxd-libs.patch
+URL:           http://siproxd.sourceforge.net/
+Source0:       https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
  
-Requires:       libosip2
+Requires:      libosip2
 
-BuildRequires:  libosip2-devel
-BuildRequires:	libtool
-BuildRequires:	autoconf
-BuildRequires:	libltdl-devel
+BuildRequires: libosip2-devel
+BuildRequires: libtool
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: libltdl-devel
 
 Requires(pre): %{_sbindir}/groupadd
 Requires(pre): %{_sbindir}/useradd
