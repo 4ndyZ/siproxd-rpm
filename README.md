@@ -1,1 +1,1 @@
-# siproxd-rpm-spec
+# siproxd-rpm

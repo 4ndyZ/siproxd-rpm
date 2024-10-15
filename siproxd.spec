@@ -6,30 +6,30 @@
 %define siproxduser     siproxd
 %define siproxdgroup    siproxd
 
-Name:           siproxd
-Version:        %{project_version_major}.%{project_version_minor}.%{project_version_patch}
-Release:        1%{?dist}
-Summary:        A SIP masquerading proxy with RTP support
-License:        GPL-2.0-or-later
+Name:          siproxd
+Version:       %{project_version_major}.%{project_version_minor}.%{project_version_patch}
+Release:       1%{?dist}
+Summary:       A SIP masquerading proxy with RTP support
+License:       GPL-2.0-or-later
 
-URL:            http://siproxd.sourceforge.net/
-Source0:        https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
+URL:           http://siproxd.sourceforge.net/
+Source0:       https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
 
 # 
-Patch0:         siproxd-libs.patch
+Patch0:        siproxd-libs.patch
 
-Requires:	    libosip2
+Requires:      libosip2
 
-BuildRequires:	libosip2-devel
-BuildRequires:  autoconf
-BuildRequires:  automake
-BuildRequires:  gcc
-BuildRequires:  make
-BuildRequires:  libtool
-BuildRequires:  libtool-ltdl-devel
+BuildRequires: libosip2-devel
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: gcc
+BuildRequires: make
+BuildRequires: libtool
+BuildRequires: libtool-ltdl-devel
 
-Requires(pre):  %{_sbindir}/groupadd
-Requires(pre):  %{_sbindir}/useradd
+Requires(pre): %{_sbindir}/groupadd
+Requires(pre): %{_sbindir}/useradd
 
 %description
 Siproxd is a proxy/masquerading daemon for SIP (Session Initiation
@@ -84,11 +84,8 @@ rm -rf %{buildroot}/usr/share/doc/%{name}
 
 %pre
 %service_add_pre siproxd.service
-getent group %{siproxdgroup} >/dev/null || \
-	%{_sbindir}/groupadd -r %{siproxdgroup}
-getent passwd %{siproxduser} >/dev/null || \
-	%{_sbindir}/useradd -r -g %{siproxdgroup} -s /bin/false \
-	-c "Siproxd user" -d %{_rundir}/%{name} %{siproxduser}
+getent group %{siproxdgroup} >/dev/null || %{_sbindir}/groupadd -r %{siproxdgroup}
+getent passwd %{siproxduser} >/dev/null || %{_sbindir}/useradd -r -g %{siproxdgroup} -s /bin/false \ -c "Siproxd user" -d %{_rundir}/%{name} %{siproxduser}
 
 %postun
 %service_del_postun siproxd.service
