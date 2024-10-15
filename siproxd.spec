@@ -1,19 +1,22 @@
+%global project_version_major 0
+%global project_version_minor 8
+%global project_version_patch 3
+
 %define piddir          %_rundir/siproxd/
 %define siproxduser     siproxd
 %define siproxdgroup    siproxd
 
 Name:           siproxd
-Version:        0.8.3
-Release:        1
+Version:        %{project_version_major}.%{project_version_minor}.%{project_version_patch}
+Release:        1%{?dist}
 Summary:        A SIP masquerading proxy with RTP support
 License:        GPL-2.0-or-later
-Group:          Productivity/Networking/Other
 URL:            http://siproxd.sourceforge.net/
 Source0:        https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
 Requires:	    libosip2 >= 3.0.0
 BuildRequires:	libosip2 >= 3.0.0
 BuildRequires:	libosip2-devel >= 3.0.0
-BuildRequires:  autoconf
+BuildRequires:  automake
 Requires(pre):  %{_sbindir}/groupadd
 Requires(pre):  %{_sbindir}/useradd
 
