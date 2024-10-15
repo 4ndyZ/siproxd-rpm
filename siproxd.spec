@@ -18,6 +18,7 @@ BuildRequires:	libosip2 >= 3.0.0
 BuildRequires:	libosip2-devel >= 3.0.0
 BuildRequires:  libtool
 BuildRequires:  libtool-ltdl
+BuildRequires:  libtool-ltdl-devel
 Requires(pre):  %{_sbindir}/groupadd
 Requires(pre):  %{_sbindir}/useradd
 
