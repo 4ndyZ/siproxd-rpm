@@ -37,7 +37,7 @@ an IP masquerading firewall or NAT router.
 %build
 autoreconf --install --force
 CFLAGS="%{optflags} -fno-strict-aliasing"
-%configure --disable-static
+%configure --disable-static --with-libosip-prefix=%{_libdir}
 make %{?_smp_mflags}
 
 %install
