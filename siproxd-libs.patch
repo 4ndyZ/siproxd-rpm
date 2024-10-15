@@ -5,7 +5,7 @@
  dnl * Location of libraries / headerfiles
  dnl **********************************************
 +SRCH_INC="/usr/include"
-+SRCH_LIB="/usr/lib"
++SRCH_LIB="/usr/lib64"
 +
  dnl
  dnl    --with-extra-includes
