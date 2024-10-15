@@ -16,8 +16,8 @@ Source0:        https://sourceforge.net/projects/siproxd/files/siproxd/%{version
 Requires:	    libosip2 >= 3.0.0
 BuildRequires:	libosip2 >= 3.0.0
 BuildRequires:	libosip2-devel >= 3.0.0
-BuildRequires:  automake
 BuildRequires:  libtool
+BuildRequires:  libtool-ltdl
 Requires(pre):  %{_sbindir}/groupadd
 Requires(pre):  %{_sbindir}/useradd
 
