@@ -11,12 +11,23 @@ Version:        %{project_version_major}.%{project_version_minor}.%{project_vers
 Release:        1%{?dist}
 Summary:        A SIP masquerading proxy with RTP support
 License:        GPL-2.0-or-later
+
 URL:            http://siproxd.sourceforge.net/
 Source0:        https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
+
+# 
+Patch0:         siproxd-libs.patch
+
 Requires:	    libosip2
+
 BuildRequires:	libosip2-devel
+BuildRequires:  autoconf
+BuildRequires:  automake
+BuildRequires:  gcc
+BuildRequires:  make
 BuildRequires:  libtool
 BuildRequires:  libtool-ltdl-devel
+
 Requires(pre):  %{_sbindir}/groupadd
 Requires(pre):  %{_sbindir}/useradd
 
@@ -32,13 +43,13 @@ such as those from Cisco, Grandstream or Snom) to work behind
 an IP masquerading firewall or NAT router.
 
 %prep
-%setup -q
+%autosetup
 
 %build
-autoreconf --install --force
+autoreconf -fi
 CFLAGS="%{optflags} -fno-strict-aliasing"
-%configure --disable-static --with-libosip-prefix=/%{_lib}
-make %{?_smp_mflags}
+%configure --disable-static
+%make_build
 
 %install
 %make_install
@@ -68,6 +79,7 @@ rm -f %{buildroot}/%{_libdir}/%{name}/*.a
 rm -rf %{buildroot}/usr/share/doc/%{name}
 
 %post
+%ldconfig_scriptlets
 %service_add_post siproxd.service
 
 %pre
@@ -80,6 +92,7 @@ getent passwd %{siproxduser} >/dev/null || \
 
 %postun
 %service_del_postun siproxd.service
+%ldconfig_scriptlets
 
 %preun
 %service_del_preun siproxd.service
