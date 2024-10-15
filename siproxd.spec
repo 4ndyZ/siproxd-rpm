@@ -2,7 +2,7 @@
 %global project_version_minor 8
 %global project_version_patch 3
 
-%define piddir          %_rundir/siproxd/
+%define piddir          %{_rundir}/siproxd/
 %define siproxduser     siproxd
 %define siproxdgroup    siproxd
 
@@ -37,7 +37,7 @@ an IP masquerading firewall or NAT router.
 %build
 autoreconf --install --force
 CFLAGS="%{optflags} -fno-strict-aliasing"
-%configure --disable-static --with-libosip-prefix=%{_lib}
+%configure --disable-static --with-libosip-prefix=/%{_lib}
 make %{?_smp_mflags}
 
 %install
