@@ -6,27 +6,24 @@
 %define siproxduser     siproxd
 %define siproxdgroup    siproxd
 
-Name:          siproxd
-Version:       %{project_version_major}.%{project_version_minor}.%{project_version_patch}
-Release:       1%{?dist}
-Summary:       A SIP masquerading proxy with RTP support
-License:       GPL-2.0-or-later
+Name:           siproxd
+Version:        %{project_version_major}.%{project_version_minor}.%{project_version_patch}
+Release:        1%{?dist}
+Summary:        A SIP masquerading proxy with RTP support
+License:        GPL-2.0-or-later
 
-URL:           http://siproxd.sourceforge.net/
-Source0:       https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
+URL:            http://siproxd.sourceforge.net/
+Source0:        https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
 
 # 
-Patch0:        siproxd-libs.patch
+Patch0:         siproxd-libs.patch
+ 
+Requires:       libosip2
 
-Requires:      libosip2
-
-BuildRequires: libosip2-devel
-BuildRequires: autoconf
-BuildRequires: automake
-BuildRequires: gcc
-BuildRequires: make
-BuildRequires: libtool
-BuildRequires: libtool-ltdl-devel
+BuildRequires:  libosip2-devel
+BuildRequires:	libtool
+BuildRequires:	autoconf
+BuildRequires:	libltdl-devel
 
 Requires(pre): %{_sbindir}/groupadd
 Requires(pre): %{_sbindir}/useradd
@@ -46,8 +43,8 @@ an IP masquerading firewall or NAT router.
 %autosetup
 
 %build
-autoreconf -fi
-CFLAGS="%{optflags} -fno-strict-aliasing"
+autoreconf -vfi
+
 %configure --disable-static
 %make_build
 
