@@ -4,7 +4,7 @@
 
 Name:           siproxd
 Version:        0.8.3
-Release:        0
+Release:        1
 Summary:        A SIP masquerading proxy with RTP support
 License:        GPL-2.0-or-later
 Group:          Productivity/Networking/Other
