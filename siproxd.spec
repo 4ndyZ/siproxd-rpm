@@ -77,7 +77,7 @@ rm -rf %{buildroot}/usr/share/doc/%{name}
 
 %post
 %ldconfig_scriptlets
-%service_add_post siproxd.service
+%systemd_post siproxd.service
 
 %pre
 %service_add_pre siproxd.service
@@ -85,11 +85,11 @@ getent group %{siproxdgroup} >/dev/null || %{_sbindir}/groupadd -r %{siproxdgrou
 getent passwd %{siproxduser} >/dev/null || %{_sbindir}/useradd -r -g %{siproxdgroup} -s /bin/false \ -c "Siproxd user" -d %{_rundir}/%{name} %{siproxduser}
 
 %postun
-%service_del_postun siproxd.service
+%systemd_postun_with_restart siproxd.service
 %ldconfig_scriptlets
 
 %preun
-%service_del_preun siproxd.service
+%systemd_preun siproxd.service
 
 %files
 %license COPYING
