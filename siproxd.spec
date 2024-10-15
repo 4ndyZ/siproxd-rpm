@@ -18,10 +18,10 @@ Source0:       https://sourceforge.net/projects/siproxd/files/siproxd/%{version}
 Requires:      libosip2
 
 BuildRequires: libosip2-devel
-BuildRequires: libtool
 BuildRequires: autoconf
 BuildRequires: automake
-BuildRequires: libltdl-devel
+BuildRequires: libtool
+BuildRequires: libtool-ltdl-devel
 
 Requires(pre): %{_sbindir}/groupadd
 Requires(pre): %{_sbindir}/useradd
