@@ -13,11 +13,9 @@ Summary:        A SIP masquerading proxy with RTP support
 License:        GPL-2.0-or-later
 URL:            http://siproxd.sourceforge.net/
 Source0:        https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
-Requires:	    libosip2 >= 3.0.0
-BuildRequires:	libosip2 >= 3.0.0
-BuildRequires:	libosip2-devel >= 3.0.0
+Requires:	    libosip2
+BuildRequires:	libosip2-devel
 BuildRequires:  libtool
-BuildRequires:  libtool-ltdl
 BuildRequires:  libtool-ltdl-devel
 Requires(pre):  %{_sbindir}/groupadd
 Requires(pre):  %{_sbindir}/useradd
