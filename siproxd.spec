@@ -42,7 +42,7 @@ an IP masquerading firewall or NAT router.
 
 %build
 autoreconf -vfi
-%configure --disable-static CFLAGS='-Wno-implicit-int'
+%configure --disable-static CFLAGS="-Wno-implicit-int"
 %make_build
 
 %install
