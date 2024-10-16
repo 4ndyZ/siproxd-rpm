@@ -13,6 +13,8 @@ License:       GPL-2.0-or-later
 
 URL:           http://siproxd.sourceforge.net/
 Source0:       https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
+Source1:       siproxd.service
+Source2:       siproxd.logrotate
 
 Patch0:        acinclude.m4.patch
  
