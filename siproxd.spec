@@ -14,6 +14,8 @@ License:       GPL-2.0-or-later
 
 URL:           http://siproxd.sourceforge.net/
 Source0:       https://sourceforge.net/projects/siproxd/files/siproxd/%{version}/siproxd-%{version}.tar.gz
+
+Patch0:        acinclude.m4.patch
  
 Requires:      libosip2
 
@@ -42,7 +44,7 @@ an IP masquerading firewall or NAT router.
 
 %build
 autoreconf -vfi
-%configure --disable-static CFLAGS="-Wno-implicit-int"
+%configure --disable-static
 %make_build
 
 %install
