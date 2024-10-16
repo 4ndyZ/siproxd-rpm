@@ -99,7 +99,6 @@ getent passwd %{siproxduser} >/dev/null || %{_sbindir}/useradd -r -g %{siproxdgr
 %doc doc/siproxd.conf.example doc/siproxd_passwd.cfg doc/FAQ doc/KNOWN_BUGS doc/sample_*
 %attr(0755,root,root) %{_libdir}/%{name}/
 %{_sbindir}/%{name}
-%{_datadir}/%{name}
 %config %{_sysconfdir}/logrotate.d/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
 %{_unitdir}
