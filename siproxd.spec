@@ -60,14 +60,14 @@ mv %{buildroot}%{_sysconfdir}/%{name}.conf.example %{buildroot}%{_sysconfdir}/%{
 sed -i -e "s@nobody@%{siproxduser}@" %{buildroot}%{_sysconfdir}/%{name}/%{name}.conf
 
 # Deploy logrotate
-ls -la %{_sourcedir}
+ls -la 
 install -d %{buildroot}/%{_sysconfdir}/logrotate.d/
-install -m 0644 %{name}.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/%{name}
+install -m 0644 %{_sourcedir}/%{name}.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/%{name}
 
 # Deploy systemd
 install -d %{buildroot}/%{_unitdir}
-install -m 644 %{name}.service %{buildroot}/%{_unitdir}
-install -d %buildroot/%{_sbindir}
+install -m 644 %{_sourcedir}/%{name}.service %{buildroot}/%{_unitdir}
+install -d %{buildroot}/%{_sbindir}
 
 # Directory needs to exist for packaging
 mkdir -p %{buildroot}/%{_rundir}/%{name}
