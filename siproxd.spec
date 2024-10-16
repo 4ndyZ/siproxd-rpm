@@ -2,9 +2,8 @@
 %global project_version_minor 8
 %global project_version_patch 3
 
-%define piddir          %{_rundir}/siproxd/
-%define siproxduser     siproxd
-%define siproxdgroup    siproxd
+%global siproxduser     siproxd
+%global siproxdgroup    siproxd
 
 Name:          siproxd
 Version:       %{project_version_major}.%{project_version_minor}.%{project_version_patch}
@@ -59,6 +58,7 @@ mv %{buildroot}%{_sysconfdir}/%{name}.conf.example %{buildroot}%{_sysconfdir}/%{
 sed -i -e "s@nobody@%{siproxduser}@" %{buildroot}%{_sysconfdir}/%{name}/%{name}.conf
 
 # Deploy logrotate
+ls -la %{_sourcedir}
 install -d %{buildroot}/%{_sysconfdir}/logrotate.d/
 install -m 0644 %{name}.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/%{name}
 
