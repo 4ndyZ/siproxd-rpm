@@ -26,6 +26,7 @@ BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: libtool-ltdl-devel
 BuildRequires: sqlite-devel
+BuildRequires: systemd
 
 Requires(pre): %{_sbindir}/groupadd
 Requires(pre): %{_sbindir}/useradd
@@ -60,7 +61,6 @@ mv %{buildroot}%{_sysconfdir}/%{name}.conf.example %{buildroot}%{_sysconfdir}/%{
 sed -i -e "s@nobody@%{siproxduser}@" %{buildroot}%{_sysconfdir}/%{name}/%{name}.conf
 
 # Deploy logrotate
-ls -la 
 install -d %{buildroot}/%{_sysconfdir}/logrotate.d/
 install -m 0644 %{_sourcedir}/%{name}.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/%{name}
 
