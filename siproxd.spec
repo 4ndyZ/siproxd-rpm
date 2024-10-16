@@ -55,10 +55,11 @@ autoreconf -vfi
 find %{buildroot} -type f -name "*.la" -delete -print
 
 # Copy config
-mkdir -p %{buildroot}%{_sysconfdir}/%{name}
+install -d %{buildroot}%{_sysconfdir}/%{name}
 mv %{buildroot}%{_sysconfdir}/%{name}.conf.example %{buildroot}%{_sysconfdir}/%{name}/%{name}.conf
 # Adapt config
 sed -i -e "s@nobody@%{siproxduser}@" %{buildroot}%{_sysconfdir}/%{name}/%{name}.conf
+sed -i -e "s@/var/run@%{_rundir}@" %{buildroot}%{_sysconfdir}/%{name}/%{name}.conf
 
 # Deploy logrotate
 install -d %{buildroot}/%{_sysconfdir}/logrotate.d/
@@ -66,11 +67,15 @@ install -m 0644 %{_sourcedir}/%{name}.logrotate %{buildroot}/%{_sysconfdir}/logr
 
 # Deploy systemd
 install -d %{buildroot}/%{_unitdir}
-install -m 644 %{_sourcedir}/%{name}.service %{buildroot}/%{_unitdir}
+install -m 644 %{_sourcedir}/%{name}.service %{buildroot}/%{_unitdir}/%{name}.service
+sed -i -e "s@/run@%{_rundir}@" %{buildroot}/%{_unitdir}/%{name}.service
 install -d %{buildroot}/%{_sbindir}
 
-# Directory needs to exist for packaging
-mkdir -p %{buildroot}/%{_rundir}/%{name}
+# Create run directory for pid file
+install -d %{buildroot}/%{_rundir}/%{name}
+
+# Install state file directory
+install -d %{buildroot}/%{_sharedstatedir}/%{name}
 
 # Cleanup
 rm -f %{buildroot}/%{_sysconfdir}/siproxd_passwd.cfg
@@ -106,7 +111,8 @@ getent passwd %{siproxduser} >/dev/null || %{_sbindir}/useradd -r -g %{siproxdgr
 
 %dir %{_sysconfdir}/%{name}
 # make rpm know about a directory but do not package it
-%attr(0750,%{siproxduser},root) %ghost %{_rundir}/%{name}
+%attr(0750,%{siproxduser},root) %{_rundir}/%{name}
+%attr(0750,%{siproxduser},root) %{_sharedstatedir}/%{name}
 
 %changelog
 %autochangelog
