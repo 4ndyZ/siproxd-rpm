@@ -60,23 +60,18 @@ mv %{buildroot}%{_sysconfdir}/%{name}.conf.example %{buildroot}%{_sysconfdir}/%{
 # Adapt config
 sed -i -e "s@nobody@%{siproxduser}@" %{buildroot}%{_sysconfdir}/%{name}/%{name}.conf
 sed -i -e "s@/var/run@%{_rundir}@" %{buildroot}%{_sysconfdir}/%{name}/%{name}.conf
-
 # Deploy logrotate
 install -d %{buildroot}/%{_sysconfdir}/logrotate.d/
 install -m 0644 %{_sourcedir}/%{name}.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/%{name}
-
 # Deploy systemd
 install -d %{buildroot}/%{_unitdir}
 install -m 644 %{_sourcedir}/%{name}.service %{buildroot}/%{_unitdir}/%{name}.service
 sed -i -e "s@/run@%{_rundir}@" %{buildroot}/%{_unitdir}/%{name}.service
 install -d %{buildroot}/%{_sbindir}
-
 # Create run directory for pid file
 install -d %{buildroot}/%{_rundir}/%{name}
-
 # Install state file directory
 install -d %{buildroot}/%{_sharedstatedir}/%{name}
-
 # Cleanup
 rm -f %{buildroot}/%{_sysconfdir}/siproxd_passwd.cfg
 rm -f %{buildroot}/%{_libdir}/%{name}/*.a
@@ -102,17 +97,22 @@ getent passwd %{siproxduser} >/dev/null || %{_sbindir}/useradd -r -g %{siproxdgr
 %license COPYING
 %doc README AUTHORS ChangeLog
 %doc doc/siproxd.conf.example doc/siproxd_passwd.cfg doc/FAQ doc/KNOWN_BUGS doc/sample_*
+# Lib
 %attr(0755,root,root) %{_libdir}/%{name}/
+# Bin
 %{_sbindir}/%{name}
-%config %{_sysconfdir}/logrotate.d/%{name}
-%config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
+# Systemd
 %{_unitdir}
 %{_unitdir}/siproxd.service
-
+# Config dir
 %dir %{_sysconfdir}/%{name}
-# make rpm know about a directory but do not package it
-%attr(0750,%{siproxduser},root) %{_rundir}/%{name}
-%attr(0750,%{siproxduser},root) %{_sharedstatedir}/%{name}
+# Config
+%config %{_sysconfdir}/logrotate.d/%{name}
+%config(noreplace) %{_sysconfdir}/%{name}/%{name}.conf
+# Run directory for pid file
+%dir %attr(0750,%{siproxduser},root) %{_rundir}/%{name}
+# State file directory
+%dir %attr(0750,%{siproxduser},root) %{_sharedstatedir}/%{name}
 
 %changelog
 %autochangelog
